@@ -20,6 +20,9 @@ def login_page(request):
 # Authentication Token Receiver View
 @csrf_exempt
 def auth_receiver(request):
+    if request.method != 'POST':
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+
     body = json.loads(request.body)
     token = body.get('credential')
     
