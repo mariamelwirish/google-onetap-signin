@@ -2,8 +2,20 @@
 <html>
 <head>
     <title>Login</title>
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <script>
+        function handleCredentialResponse(response) {
+            console.log(response.credential);
+        }
+    </script>
 </head>
+
 <body>
     <h1>Sign in</h1>
+
+    <div id="g_id_onload"
+         data-client_id="{{ google_client_id }}"
+         data-callback="handleCredentialResponse">
+    </div>
 </body>
 </html>
