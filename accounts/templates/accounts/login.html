@@ -5,7 +5,19 @@
     <script src="https://accounts.google.com/gsi/client" async></script>
     <script>
         function handleCredentialResponse(response) {
-            console.log(response.credential);
+            fetch('/accounts/auth/', {
+                method: 'POST',
+                body: JSON.stringify({ credential: response.credential }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.redirect) {
+                    window.location.href = data.redirect;
+                }
+            })
         }
     </script>
 </head>
